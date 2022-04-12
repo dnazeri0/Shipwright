@@ -5,6 +5,8 @@
 #include "objects/object_triforce_spot/object_triforce_spot.h"
 #include "overlays/actors/ovl_Demo_Effect/z_demo_effect.h"
 
+u32 colorchange;
+
 typedef struct {
     /* 0x00 */ u8 flag;
     /* 0x02 */ u16 textId;
@@ -703,6 +705,12 @@ Color_RGB8 sTunicColors[] = {
 Color_RGB8 sGauntletColors[] = {
     { 255, 255, 255 },
     { 254, 207, 15 },
+    { 148, 0, 211 },
+    { 75, 0, 130 },
+    { 0, 0, 255 },
+    { 0, 255, 0 },
+    { 255, 255, 0 },
+    { 255, 127, 0 },
 };
 
 Gfx* sBootDListGroups[][2] = {
@@ -757,8 +765,8 @@ void func_8008F470(GlobalContext* globalCtx, void** skeleton, Vec3s* jointTable,
 
             if (strengthUpgrade >= 2) { // silver or gold gauntlets
                 gDPPipeSync(POLY_OPA_DISP++);
-
-                color = &sGauntletColors[strengthUpgrade - 2];
+                colorchange++;
+                color = &sGauntletColors[colorchange];
                 gDPSetEnvColor(POLY_OPA_DISP++, color->r, color->g, color->b, 0);
 
                 gSPDisplayList(POLY_OPA_DISP++, gLinkAdultLeftGauntletPlate1DL);

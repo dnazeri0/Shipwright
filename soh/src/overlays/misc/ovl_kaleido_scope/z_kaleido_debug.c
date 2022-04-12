@@ -24,7 +24,7 @@ static u16 sRowFirstSections[] = {
 
 // Maximum value of each upgrade type
 static u8 sMaxUpgradeValues[] = {
-    3, 3, 3, 2, 2, 3, 3, 3,
+    3, 3, 7, 2, 2, 3, 3, 3,
 };
 
 // Item ID corresponding to each slot, aside from bottles and trade items
@@ -59,21 +59,21 @@ void KaleidoScope_DrawDebugEditorText(Gfx** gfxp) {
     GfxPrint_SetPos(&printer, 23, 15);
     GfxPrint_Printf(&printer, "%s", GFXP_KATAKANA "ﾀﾃ"); // "Shield"
     GfxPrint_SetPos(&printer, 4, 17);
-    GfxPrint_Printf(&printer, "%s", "MAP");
-    GfxPrint_SetPos(&printer, 4, 19);
-    GfxPrint_Printf(&printer, "%s", GFXP_HIRAGANA "ﾌｳｲﾝ"); // "Seal"
-    GfxPrint_SetPos(&printer, 20, 19);
-    GfxPrint_Printf(&printer, "%s", GFXP_HIRAGANA "ｾｲﾚｲｾｷ"); // "Spiritual Stone"
-    GfxPrint_SetPos(&printer, 4, 21);
-    GfxPrint_Printf(&printer, "%s", GFXP_KATAKANA "ｵｶﾘﾅ"); // "Ocarina"
-    GfxPrint_SetPos(&printer, 4, 24);
-    GfxPrint_Printf(&printer, "%s", GFXP_KATAKANA "ｺﾚｸﾄ"); // "Collect"
-    GfxPrint_SetPos(&printer, 14, 24);
-    GfxPrint_Printf(&printer, "%s", GFXP_KATAKANA "ｷﾝｽﾀ"); // "Skulltula"
-    GfxPrint_SetPos(&printer, 23, 24);
-    GfxPrint_Printf(&printer, "%s", GFXP_KATAKANA "ｶｹﾗ"); // "Gold Token"
-    GfxPrint_SetPos(&printer, 28, 24);
-    GfxPrint_Printf(&printer, "%s", "/4");
+    // GfxPrint_Printf(&printer, "%s", "MAP");
+    // GfxPrint_SetPos(&printer, 4, 19);
+    // GfxPrint_Printf(&printer, "%s", GFXP_HIRAGANA "ﾌｳｲﾝ"); // "Seal"
+    // GfxPrint_SetPos(&printer, 20, 19);
+    // GfxPrint_Printf(&printer, "%s", GFXP_HIRAGANA "ｾｲﾚｲｾｷ"); // "Spiritual Stone"
+    // GfxPrint_SetPos(&printer, 4, 21);
+    // GfxPrint_Printf(&printer, "%s", GFXP_KATAKANA "ｵｶﾘﾅ"); // "Ocarina"
+    // GfxPrint_SetPos(&printer, 4, 24);
+    // GfxPrint_Printf(&printer, "%s", GFXP_KATAKANA "ｺﾚｸﾄ"); // "Collect"
+    // GfxPrint_SetPos(&printer, 14, 24);
+    // GfxPrint_Printf(&printer, "%s", GFXP_KATAKANA "ｷﾝｽﾀ"); // "Skulltula"
+    // GfxPrint_SetPos(&printer, 23, 24);
+    // GfxPrint_Printf(&printer, "%s", GFXP_KATAKANA "ｶｹﾗ"); // "Gold Token"
+    // GfxPrint_SetPos(&printer, 28, 24);
+    // GfxPrint_Printf(&printer, "%s", "/4");
 
     *gfxp = GfxPrint_Close(&printer);
     GfxPrint_Destroy(&printer);
@@ -120,7 +120,7 @@ void KaleidoScope_DrawDebugEditor(GlobalContext* globalCtx) {
     gDPSetRenderMode(POLY_KAL_DISP++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
     gDPSetCombineMode(POLY_KAL_DISP++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
     gDPSetPrimColor(POLY_KAL_DISP++, 0, 0, 0, 0, 0, 220);
-    gDPFillRectangle(POLY_KAL_DISP++, 24, 12, 298, 228);
+    // gDPFillRectangle(POLY_KAL_DISP++, 24, 12, 298, 228);
     gDPPipeSync(POLY_KAL_DISP++);
     gDPSetCombineLERP(POLY_KAL_DISP++, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0,
                       PRIMITIVE, 0);
@@ -239,73 +239,73 @@ void KaleidoScope_DrawDebugEditor(GlobalContext* globalCtx) {
     }
 
     // Equipment
-    for (spD8[1] = 202, i = 0; i < 4; i++, spD8[1] += 12) {
-        KaleidoScope_DrawDigit(globalCtx, ALL_EQUIP_VALUE(i), spD8[1], 115);
-    }
+    // for (spD8[1] = 202, i = 0; i < 4; i++, spD8[1] += 12) {
+    //     KaleidoScope_DrawDigit(globalCtx, ALL_EQUIP_VALUE(i), spD8[1], 115);
+    // }
 
     // Dungeon Items
-    for (spD8[1] = 78, i = 0; i < 12; i++, spD8[1] += 12) {
-        spD8[2] = gSaveContext.inventory.dungeonItems[i] & gEquipMasks[0];
-        KaleidoScope_DrawDigit(globalCtx, spD8[2], spD8[1], 132);
-    }
+    // for (spD8[1] = 78, i = 0; i < 12; i++, spD8[1] += 12) {
+    //     spD8[2] = gSaveContext.inventory.dungeonItems[i] & gEquipMasks[0];
+    //     KaleidoScope_DrawDigit(globalCtx, spD8[2], spD8[1], 132);
+    // }
 
     // Medallions
-    for (spD8[1] = 78, i = 0; i < 6; i++, spD8[1] += 12) {
-        spD8[2] = 0;
-        if (CHECK_QUEST_ITEM(QUEST_MEDALLION_FOREST + i)) {
-            spD8[2] = 1;
-        }
-        KaleidoScope_DrawDigit(globalCtx, spD8[2], spD8[1], 149);
-    }
+    // for (spD8[1] = 78, i = 0; i < 6; i++, spD8[1] += 12) {
+    //     spD8[2] = 0;
+    //     if (CHECK_QUEST_ITEM(QUEST_MEDALLION_FOREST + i)) {
+    //         spD8[2] = 1;
+    //     }
+    //     KaleidoScope_DrawDigit(globalCtx, spD8[2], spD8[1], 149);
+    // }
 
     // Spiritual Stones
-    for (spD8[1] = 210, i = 0; i < 3; i++, spD8[1] += 12) {
-        spD8[2] = 0;
-        if (CHECK_QUEST_ITEM(QUEST_KOKIRI_EMERALD + i)) {
-            spD8[2] = 1;
-        }
-        KaleidoScope_DrawDigit(globalCtx, spD8[2], spD8[1], 149);
-    }
+    // for (spD8[1] = 210, i = 0; i < 3; i++, spD8[1] += 12) {
+    //     spD8[2] = 0;
+    //     if (CHECK_QUEST_ITEM(QUEST_KOKIRI_EMERALD + i)) {
+    //         spD8[2] = 1;
+    //     }
+    //     KaleidoScope_DrawDigit(globalCtx, spD8[2], spD8[1], 149);
+    // }
 
     // Songs
-    for (spD8[1] = 78, i = 0; i < 12; i++, spD8[1] += 12) {
-        spD8[2] = 0;
-        if (CHECK_QUEST_ITEM(QUEST_SONG_MINUET + i)) {
-            spD8[2] = 1;
-        }
-        KaleidoScope_DrawDigit(globalCtx, spD8[2], spD8[1], 166);
-    }
+    // for (spD8[1] = 78, i = 0; i < 12; i++, spD8[1] += 12) {
+    //     spD8[2] = 0;
+    //     if (CHECK_QUEST_ITEM(QUEST_SONG_MINUET + i)) {
+    //         spD8[2] = 1;
+    //     }
+    //     KaleidoScope_DrawDigit(globalCtx, spD8[2], spD8[1], 166);
+    // }
 
     // Other Quest Items
-    for (spD8[1] = 78, i = 0; i < 2; i++, spD8[1] += 12) {
-        spD8[2] = 0;
-        if (CHECK_QUEST_ITEM(QUEST_STONE_OF_AGONY + i)) {
-            spD8[2] = 1;
-        }
-        KaleidoScope_DrawDigit(globalCtx, spD8[2], spD8[1], 185);
-    }
+    // for (spD8[1] = 78, i = 0; i < 2; i++, spD8[1] += 12) {
+    //     spD8[2] = 0;
+    //     if (CHECK_QUEST_ITEM(QUEST_STONE_OF_AGONY + i)) {
+    //         spD8[2] = 1;
+    //     }
+    //     KaleidoScope_DrawDigit(globalCtx, spD8[2], spD8[1], 185);
+    // }
 
     // GS Tokens
-    spD8[3] = gSaveContext.inventory.gsTokens;
-    spD8[1] = 0;
-    spD8[2] = 0;
-    while (spD8[3] >= 100) {
-        spD8[1]++;
-        spD8[3] -= 100;
-    }
+    // spD8[3] = gSaveContext.inventory.gsTokens;
+    // spD8[1] = 0;
+    // spD8[2] = 0;
+    // while (spD8[3] >= 100) {
+    //     spD8[1]++;
+    //     spD8[3] -= 100;
+    // }
 
-    while (spD8[3] >= 10) {
-        spD8[2]++;
-        spD8[3] -= 10;
-    }
+    // while (spD8[3] >= 10) {
+    //     spD8[2]++;
+    //     spD8[3] -= 10;
+    // }
 
-    KaleidoScope_DrawDigit(globalCtx, spD8[1], 145, 185);
-    KaleidoScope_DrawDigit(globalCtx, spD8[2], 155, 185);
-    KaleidoScope_DrawDigit(globalCtx, spD8[3], 165, 185);
+    // KaleidoScope_DrawDigit(globalCtx, spD8[1], 145, 185);
+    // KaleidoScope_DrawDigit(globalCtx, spD8[2], 155, 185);
+    // KaleidoScope_DrawDigit(globalCtx, spD8[3], 165, 185);
 
     // Heart Pieces (X / 4)
-    KaleidoScope_DrawDigit(globalCtx, ((gSaveContext.inventory.questItems & 0xF0000000) & 0xF0000000) >> 0x1C, 210,
-                           185);
+    // KaleidoScope_DrawDigit(globalCtx, ((gSaveContext.inventory.questItems & 0xF0000000) & 0xF0000000) >> 0x1C, 210,
+    //                        185);
 
     // Handles navigating the menu to different sections with the D-Pad
     // When the same direction is held, registers the input periodically based on a timer
